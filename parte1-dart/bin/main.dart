@@ -24,7 +24,7 @@ void main() {
   // Cria um objeto da classe filha.
   final instrumentoEletrico = InstrumentoEletrico(
     nome: 'Guitarra Elétrica',
-    marca: 'Fender',
+    marca: 'Gibson',
     preco: 4500.00,
     ano: 2025,
     tipoCaptador: 'Humbucker',
