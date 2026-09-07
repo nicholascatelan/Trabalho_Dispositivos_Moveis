@@ -2,7 +2,7 @@ import 'instrumento.dart';
 
 class InstrumentoEletrico extends Instrumento {
   String tipoCaptador;
-  double potencia;
+  String modelo;
 
   // Construtor da classe filha
   InstrumentoEletrico({
@@ -13,12 +13,12 @@ class InstrumentoEletrico extends Instrumento {
     required super.ano,
 
     required this.tipoCaptador,
-    required this.potencia,
+    required this.modelo,
   });
 
   // Sobrescreve o método ficha() que existe na classe pai
   @override
   String ficha() {
-    return '${super.ficha()} | Captador: $tipoCaptador | Potência: ${potencia}W';
+    return '${super.ficha()} | Captador: $tipoCaptador | Potência: ${modelo}W';
   }
 }

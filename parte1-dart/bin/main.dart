@@ -4,7 +4,7 @@ import 'models/instrumento_eletrico.dart';
 
 void main() {
   // ==================================================
-  // EXERCÍCIO 2 — MODELAGEM DA ENTIDADE PRINCIPAL
+  //         EXERCÍCIO 1 — ENTIDADE PRINCIPAL
   // ==================================================
 
   final instrumento = Instrumento(
@@ -18,17 +18,17 @@ void main() {
   print(instrumento.ficha());
 
   // ==================================================
-  // EXERCÍCIO 2 - HERANÇA
+  //         EXERCÍCIO 2 - HERANÇA
   // ==================================================
 
   // Cria um objeto da classe filha.
   final instrumentoEletrico = InstrumentoEletrico(
     nome: 'Guitarra Elétrica',
     marca: 'Gibson',
-    preco: 4500.00,
+    preco: 8000.00,
     ano: 2025,
     tipoCaptador: 'Humbucker',
-    potencia: 50,
+    modelo: 'Les Paul',
   );
 
   
