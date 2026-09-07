@@ -1,6 +1,6 @@
 import 'models/instrumento.dart';
 import 'models/instrumento_eletrico.dart';
-
+import 'models/catalogo.dart';
 
 void main() {
   // ==================================================
@@ -31,12 +31,53 @@ void main() {
     modelo: 'Les Paul',
   );
 
-  
   print('\n===== [2] HERANÇA =====');
 
-  
   print(instrumento.ficha());
 
-  
   print(instrumentoEletrico.ficha());
+
+  // ==================================================
+  //         EXERCÍCIO 3 - COMPOSIÇÃO
+  // ==================================================
+
+
+  final catalogo = Catalogo();
+
+  catalogo.adicionar(instrumento);
+
+  catalogo.adicionar(
+    Instrumento(
+      nome: 'Baixo',
+      marca: 'Fender',
+      preco: 12000,
+      ano: 1967
+    )
+  );
+  catalogo.adicionar(
+    Instrumento(
+      nome: 'Teclado',
+      marca: 'Yamaha',
+      preco: 15000,
+      ano: 2025
+    )
+  );
+  catalogo.adicionar(
+    Instrumento(
+      nome: 'Bateria',
+      marca: 'Pearl',
+      preco: 5000,
+      ano: 2016
+    )
+  );
+
+print('\n===== [3] COMPOSIÇÃO =====');
+
+// Mostra quantos instrumentos existem no catálogo.
+print('Quantidade de instrumentos: ${catalogo.quantidade}');
+
+for (final item in catalogo.instrumentos) {
+  print(item.ficha());
+}
+
 }

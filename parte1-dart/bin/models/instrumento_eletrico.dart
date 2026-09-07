@@ -19,6 +19,6 @@ class InstrumentoEletrico extends Instrumento {
   // Sobrescreve o método ficha() que existe na classe pai
   @override
   String ficha() {
-    return '${super.ficha()} | Captador: $tipoCaptador | Potência: ${modelo}W';
+    return '${super.ficha()} | Captador: $tipoCaptador | Modelo: ${modelo}W';
   }
 }
