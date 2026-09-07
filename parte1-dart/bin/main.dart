@@ -26,7 +26,7 @@ void main() {
     nome: 'Guitarra Elétrica',
     marca: 'Gibson',
     preco: 8000.00,
-    ano: 2025,
+    ano: 1957,
     tipoCaptador: 'Humbucker',
     modelo: 'Les Paul',
   );
