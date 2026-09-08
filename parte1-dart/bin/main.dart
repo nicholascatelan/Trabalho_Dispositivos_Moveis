@@ -80,4 +80,27 @@ for (final item in catalogo.instrumentos) {
   print(item.ficha());
 }
 
+  // ==================================================
+  //         EXERCÍCIO 4 - EMCAPSULAMENTO
+  // ==================================================
+
+print('\n===== [4] ENCAPSULAMENTO =====');
+
+print(
+  'Valor total antes: R\$ ${catalogo.valorTotal.toStringAsFixed(2)}',
+);
+
+catalogo.adicionar(
+  Instrumento(
+    nome: 'Teclado Musical',
+    marca: 'Casio',
+    preco: 1500.00,
+    ano: 2025,
+  ),
+);
+
+print(
+  'Valor total depois: R\$ ${catalogo.valorTotal.toStringAsFixed(2)}',
+);
+
 }
