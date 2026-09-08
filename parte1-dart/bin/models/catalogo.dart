@@ -14,4 +14,12 @@ class Catalogo {
   List<Instrumento> get instrumentos {
     return List.unmodifiable(_instrumentos); // -> imprede que a lista seja alterada diretamente de fora da classe
   }
+  
+  double get valorTotal {
+    return _instrumentos.fold(
+      0,
+      (total, instrumento) => total + instrumento.preco,
+    );
+
+  }
 }
