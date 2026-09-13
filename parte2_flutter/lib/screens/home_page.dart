@@ -1,13 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:parte2_flutter/screens/instrumentos_card.dart';
+import '../models/instrumento.dart';
+import '../models/catalogo.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  // Objeto responsável por agrupar os instrumentos.
+  final Catalogo catalogo = Catalogo();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Instrumento 1
+    catalogo.adicionar(
+      Instrumento(
+        nome: 'Violão Acústico',
+        marca: 'Yamaha',
+        preco: 1299.90,
+        ano: 2024,
+      ),
+    );
+
+    // Instrumento 2
+    catalogo.adicionar(
+      Instrumento(
+        nome: 'Baixo',
+        marca: 'Tagima',
+        preco: 1899.90,
+        ano: 2023,
+      ),
+    );
+
+    // Instrumento 3
+    catalogo.adicionar(
+      Instrumento(
+        nome: 'Bateria',
+        marca: 'Pearl',
+        preco: 5200.00,
+        ano: 2022,
+      ),
+    );
+
+    // Instrumento 4
+    catalogo.adicionar(
+      Instrumento(
+        nome: 'Bateria Eletrônica',
+        marca: 'Roland',
+        preco: 6800.00,
+        ano: 2024,
+      ),
+    );
+
+    // Instrumento 5
+    catalogo.adicionar(
+      Instrumento(
+        nome: 'Teclado Musical',
+        marca: 'Casio',
+        preco: 1500.00,
+        ano: 2025,
+      ),
+    );
+
+    // Instrumento 6
+    catalogo.adicionar(
+      Instrumento(
+        nome: 'Guitarra Elétrica',
+        marca: 'Gibson',
+        preco: 4500.00,
+        ano: 2025,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-      // Barra superior da tela
+      // Barra superior.
       appBar: AppBar(
         title: const Text(
           'Loja de Instrumentos',
@@ -20,18 +97,17 @@ class HomePage extends StatelessWidget {
         foregroundColor: Colors.white,
       ),
 
-      // Corpo da tela
+      // Corpo da tela.
       body: Column(
-
-        // Controla o eixo vertical
+        // Eixo principal da Column: vertical.
         mainAxisAlignment: MainAxisAlignment.start,
 
-        // Controla o eixo horizontal
+        // Eixo cruzado da Column: horizontal.
         crossAxisAlignment: CrossAxisAlignment.stretch,
 
         children: [
 
-          // Total do Exercício 4
+          // Total do catálogo.
           Container(
             margin: const EdgeInsets.all(16),
             padding: const EdgeInsets.all(20),
@@ -41,10 +117,10 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
 
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Valor total do catálogo',
                   style: TextStyle(
                     color: Colors.white70,
@@ -52,17 +128,43 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
 
                 Text(
-                  'R\$ 15.199,80',
-                  style: TextStyle(
+                  'R\$ ${catalogo.valorTotal.toStringAsFixed(2)}',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
+            ),
+          ),
+
+          // Lista dinâmica.
+          Expanded(
+            child: ListView.builder(
+
+              // Quantidade de itens que existem no catálogo.
+              itemCount: catalogo.instrumentos.length,
+
+              // Constrói cada cartão da lista.
+              itemBuilder: (context, index) {
+
+                // Pega o instrumento pela posição da lista.
+                final instrumento = catalogo.instrumentos[index];
+
+                // Reutiliza o cartão do Exercício 6.
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
+                  child: InstrumentoCard(
+                    instrumento: instrumento,
+                  ),
+                );
+              },
             ),
           ),
         ],
