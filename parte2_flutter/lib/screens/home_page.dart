@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:parte2_flutter/screens/instrumentos_card.dart';
 import '../models/instrumento.dart';
 import '../models/catalogo.dart';
+import 'instrumento_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,15 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  // Objeto responsável por agrupar os instrumentos.
+  // Objeto responsável por guardar os instrumentos.
   final Catalogo catalogo = Catalogo();
 
   @override
   void initState() {
     super.initState();
 
-    // Instrumento 1
     catalogo.adicionar(
       Instrumento(
         nome: 'Violão Acústico',
@@ -29,7 +27,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    // Instrumento 2
     catalogo.adicionar(
       Instrumento(
         nome: 'Baixo',
@@ -39,7 +36,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    // Instrumento 3
     catalogo.adicionar(
       Instrumento(
         nome: 'Bateria',
@@ -49,7 +45,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    // Instrumento 4
     catalogo.adicionar(
       Instrumento(
         nome: 'Bateria Eletrônica',
@@ -59,7 +54,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    // Instrumento 5
     catalogo.adicionar(
       Instrumento(
         nome: 'Teclado Musical',
@@ -69,7 +63,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    // Instrumento 6
     catalogo.adicionar(
       Instrumento(
         nome: 'Guitarra Elétrica',
@@ -83,8 +76,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      // Barra superior.
       appBar: AppBar(
         title: const Text(
           'Loja de Instrumentos',
@@ -97,21 +88,15 @@ class _HomePageState extends State<HomePage> {
         foregroundColor: Colors.white,
       ),
 
-      // Corpo da tela.
       body: Column(
-        // Eixo principal da Column: vertical.
         mainAxisAlignment: MainAxisAlignment.start,
-
-        // Eixo cruzado da Column: horizontal.
         crossAxisAlignment: CrossAxisAlignment.stretch,
 
         children: [
-
-          // Total do catálogo.
+          // Mostra o valor total do catálogo.
           Container(
             margin: const EdgeInsets.all(16),
             padding: const EdgeInsets.all(20),
-
             decoration: BoxDecoration(
               color: Colors.indigo,
               borderRadius: BorderRadius.circular(16),
@@ -142,24 +127,19 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          // Lista dinâmica.
+          // Lista dos instrumentos.
           Expanded(
             child: ListView.builder(
-
-              // Quantidade de itens que existem no catálogo.
               itemCount: catalogo.instrumentos.length,
 
-              // Constrói cada cartão da lista.
               itemBuilder: (context, index) {
-
-                // Pega o instrumento pela posição da lista.
                 final instrumento = catalogo.instrumentos[index];
 
-                // Reutiliza o cartão do Exercício 6.
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                   ),
+
                   child: InstrumentoCard(
                     instrumento: instrumento,
                   ),
