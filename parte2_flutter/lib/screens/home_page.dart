@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/instrumento.dart';
 import '../models/catalogo.dart';
 import 'instrumento_card.dart';
+import 'cadastro_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -152,6 +153,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => const CadastroPage()));
+        },
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
       ),
     );
   }
