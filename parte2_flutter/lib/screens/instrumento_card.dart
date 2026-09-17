@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/instrumento.dart';
-import 'InstrumentoDetalhes.dart';
+import 'instrumento_detalhes.dart';
 
 class InstrumentoCard extends StatelessWidget {
   final Instrumento instrumento;
