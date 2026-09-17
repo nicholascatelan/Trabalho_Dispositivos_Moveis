@@ -25,6 +25,7 @@ class InstrumentoDetalhes extends StatelessWidget {
 
       body: Padding(
         padding: const EdgeInsets.all(20),
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -57,21 +58,28 @@ class InstrumentoDetalhes extends StatelessWidget {
               style: const TextStyle(fontSize: 18),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
+
+            Text(
+              'Categoria: ${instrumento.categoria}',
+              style: const TextStyle(fontSize: 18),
+            ),
+
+            const SizedBox(height: 20),
 
             const Text(
-              'Informações do instrumento',
+              'Descrição',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
 
-            const Text(
-              'Este instrumento faz parte do catálogo da loja.',
-              style: TextStyle(fontSize: 16),
+            Text(
+              instrumento.descricao,
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),
