@@ -24,6 +24,8 @@ class _HomePageState extends State<HomePage> {
         marca: 'Yamaha',
         preco: 1299.90,
         ano: 2024,
+        categoria: 'Cordas',
+        descricao: 'Violão acústico indicado para estudos e apresentações.',
       ),
     );
 
@@ -33,6 +35,8 @@ class _HomePageState extends State<HomePage> {
         marca: 'Tagima',
         preco: 1899.90,
         ano: 2023,
+        categoria: 'Cordas',
+        descricao: 'Baixo elétrico utilizado principalmente em bandas.',
       ),
     );
 
@@ -42,6 +46,8 @@ class _HomePageState extends State<HomePage> {
         marca: 'Pearl',
         preco: 5200.00,
         ano: 2022,
+        categoria: 'Percussão',
+        descricao: 'Bateria acústica completa para ensaios e apresentações.',
       ),
     );
 
@@ -51,6 +57,9 @@ class _HomePageState extends State<HomePage> {
         marca: 'Roland',
         preco: 6800.00,
         ano: 2024,
+        categoria: 'Percussão',
+        descricao:
+            'Bateria eletrônica com diferentes sons e controle de volume.',
       ),
     );
 
@@ -60,6 +69,8 @@ class _HomePageState extends State<HomePage> {
         marca: 'Casio',
         preco: 1500.00,
         ano: 2025,
+        categoria: 'Teclas',
+        descricao: 'Teclado musical indicado para estudo e apresentações.',
       ),
     );
 
@@ -69,6 +80,8 @@ class _HomePageState extends State<HomePage> {
         marca: 'Gibson',
         preco: 4500.00,
         ano: 2025,
+        categoria: 'Cordas',
+        descricao: 'Guitarra elétrica voltada para apresentações e gravações.',
       ),
     );
   }
@@ -79,9 +92,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text(
           'Loja de Instrumentos',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Colors.indigo,
@@ -107,10 +118,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 const Text(
                   'Valor total do catálogo',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 15,
-                  ),
+                  style: TextStyle(color: Colors.white70, fontSize: 15),
                 ),
 
                 const SizedBox(height: 5),
@@ -136,13 +144,9 @@ class _HomePageState extends State<HomePage> {
                 final instrumento = catalogo.instrumentos[index];
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
 
-                  child: InstrumentoCard(
-                    instrumento: instrumento,
-                  ),
+                  child: InstrumentoCard(instrumento: instrumento),
                 );
               },
             ),
