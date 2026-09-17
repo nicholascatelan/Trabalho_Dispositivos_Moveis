@@ -7,19 +7,23 @@ class Catalogo {
     _instrumentos.add(instrumento);
   }
 
-  int get quantidade{
+  // Exclui um instrumento do catálogo
+  void excluir(Instrumento instrumento) {
+    _instrumentos.remove(instrumento);
+  }
+
+  int get quantidade {
     return _instrumentos.length;
   }
 
   List<Instrumento> get instrumentos {
-    return List.unmodifiable(_instrumentos); // -> imprede que a lista seja alterada diretamente de fora da classe
+    return List.unmodifiable(_instrumentos);
   }
-  
+
   double get valorTotal {
     return _instrumentos.fold(
       0,
       (total, instrumento) => total + instrumento.preco,
     );
-
   }
 }

@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Abre a tela de cadastro e espera um novo instrumento.
+  // Abre a tela de cadastro
   Future<void> abrirCadastro() async {
     final novoInstrumento = await Navigator.of(context).push<Instrumento>(
       MaterialPageRoute(
@@ -99,13 +99,18 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    // Se um instrumento foi cadastrado, adiciona na lista
-    // e atualiza a tela.
     if (novoInstrumento != null) {
       setState(() {
         catalogo.adicionar(novoInstrumento);
       });
     }
+  }
+
+  // Exclui um instrumento
+  void excluirInstrumento(Instrumento instrumento) {
+    setState(() {
+      catalogo.excluir(instrumento);
+    });
   }
 
   @override
@@ -127,14 +132,15 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Valor total do catálogo
           Container(
             margin: const EdgeInsets.all(16),
             padding: const EdgeInsets.all(20),
+
             decoration: BoxDecoration(
               color: Colors.indigo,
               borderRadius: BorderRadius.circular(16),
             ),
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -145,7 +151,9 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 15,
                   ),
                 ),
+
                 const SizedBox(height: 5),
+
                 Text(
                   'R\$ ${catalogo.valorTotal.toStringAsFixed(2)}',
                   style: const TextStyle(
@@ -158,10 +166,10 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          // Lista de instrumentos
           Expanded(
             child: ListView.builder(
               itemCount: catalogo.instrumentos.length,
+
               itemBuilder: (context, index) {
                 final instrumento = catalogo.instrumentos[index];
 
@@ -169,8 +177,14 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                   ),
+
                   child: InstrumentoCard(
                     instrumento: instrumento,
+
+                    // Quando clicar na lixeira
+                    onExcluir: () {
+                      excluirInstrumento(instrumento);
+                    },
                   ),
                 );
               },
@@ -179,7 +193,6 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
 
-      // Botão para cadastrar um novo instrumento
       floatingActionButton: FloatingActionButton(
         onPressed: abrirCadastro,
         backgroundColor: Colors.indigo,
