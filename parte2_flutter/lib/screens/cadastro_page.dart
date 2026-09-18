@@ -22,8 +22,8 @@ class _CadastroPageState extends State<CadastroPage> {
   }
 
   void confirmar() {
-    final nome = nomeController.text.trim();
-    final marca = marcaController.text.trim();
+    final nome = nomeController.text;
+    final marca = marcaController.text;
 
     final preco = double.tryParse(
       precoController.text.replaceAll(',', '.'),
@@ -32,12 +32,9 @@ class _CadastroPageState extends State<CadastroPage> {
     if (nome.isEmpty || marca.isEmpty || preco == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(
-            'Preencha todos os campos corretamente.',
-          ),
+          content: Text('Preencha os campos corretamente.'),
         ),
       );
-
       return;
     }
 
@@ -46,146 +43,68 @@ class _CadastroPageState extends State<CadastroPage> {
       marca: marca,
       preco: preco,
       ano: 2026,
-      categoria: 'Outros',
+      categoria: 'Não informada',
       descricao: 'Instrumento cadastrado pelo usuário.',
     );
 
     Navigator.pop(context, novoInstrumento);
   }
 
-  InputDecoration campoDecoration({
-    required String titulo,
-    required String dica,
-    required IconData icone,
-  }) {
-    return InputDecoration(
-      labelText: titulo,
-      hintText: dica,
-      prefixIcon: Icon(icone),
-      filled: true,
-      fillColor: const Color(0xFFF5F5F5),
-
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide.none,
-      ),
-
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide.none,
-      ),
-
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(
-          color: Colors.black,
-          width: 1.5,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-
       appBar: AppBar(
-        title: const Text('Novo instrumento'),
-        backgroundColor: const Color(0xFF171717),
+        title: const Text('Cadastrar Instrumento'),
+        backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
 
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(22),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
 
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(
-              Icons.library_music,
-              size: 45,
-            ),
-
-            const SizedBox(height: 15),
-
-            const Text(
-              'Adicionar ao catálogo',
-              style: TextStyle(
-                fontSize: 27,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            const SizedBox(height: 7),
-
-            const Text(
-              'Preencha as informações do instrumento.',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 15,
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
             TextFormField(
               controller: nomeController,
-              decoration: campoDecoration(
-                titulo: 'Nome',
-                dica: 'Ex: Guitarra Les Paul',
-                icone: Icons.music_note,
+              decoration: const InputDecoration(
+                labelText: 'Nome',
+                prefixIcon: Icon(Icons.music_note),
+                border: OutlineInputBorder(),
               ),
             ),
 
-            const SizedBox(height: 18),
+            const SizedBox(height: 16),
 
             TextFormField(
               controller: marcaController,
-              decoration: campoDecoration(
-                titulo: 'Marca',
-                dica: 'Ex: Gibson',
-                icone: Icons.business,
+              decoration: const InputDecoration(
+                labelText: 'Marca',
+                prefixIcon: Icon(Icons.business),
+                border: OutlineInputBorder(),
               ),
             ),
 
-            const SizedBox(height: 18),
+            const SizedBox(height: 16),
 
             TextFormField(
               controller: precoController,
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
-              decoration: campoDecoration(
-                titulo: 'Preço',
-                dica: 'Ex: 4500,00',
-                icone: Icons.attach_money,
+              decoration: const InputDecoration(
+                labelText: 'Preço',
+                prefixIcon: Icon(Icons.attach_money),
+                border: OutlineInputBorder(),
               ),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 24),
 
             SizedBox(
               width: double.infinity,
-              height: 55,
-              child: ElevatedButton.icon(
+              child: ElevatedButton(
                 onPressed: confirmar,
-
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF171717),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-
-                icon: const Icon(Icons.add),
-                label: const Text(
-                  'ADICIONAR AO CATÁLOGO',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                child: const Text('Confirmar'),
               ),
             ),
           ],
