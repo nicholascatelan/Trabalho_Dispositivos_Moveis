@@ -91,7 +91,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Abre a tela de cadastro
   Future<void> abrirCadastro() async {
     final novoInstrumento = await Navigator.of(context).push<Instrumento>(
       MaterialPageRoute(
@@ -106,7 +105,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  // Exclui um instrumento
   void excluirInstrumento(Instrumento instrumento) {
     setState(() {
       catalogo.excluir(instrumento);
@@ -116,76 +114,114 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF5F5F5),
+
       appBar: AppBar(
-        title: const Text(
-          'Loja de Instrumentos',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.indigo,
+        backgroundColor: const Color(0xFF171717),
         foregroundColor: Colors.white,
+        elevation: 0,
+        title: const Row(
+          children: [
+            Icon(
+              Icons.graphic_eq,
+              size: 30,
+            ),
+            SizedBox(width: 10),
+            Text(
+              'MUSIC STORE',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.5,
+              ),
+            ),
+          ],
+        ),
       ),
 
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // Cabeçalho da loja
           Container(
-            margin: const EdgeInsets.all(16),
-            padding: const EdgeInsets.all(20),
-
-            decoration: BoxDecoration(
-              color: Colors.indigo,
-              borderRadius: BorderRadius.circular(16),
+            padding: const EdgeInsets.fromLTRB(20, 25, 20, 25),
+            decoration: const BoxDecoration(
+              color: Color(0xFF171717),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25),
+              ),
             ),
-
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Valor total do catálogo',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 15,
-                  ),
-                ),
-
-                const SizedBox(height: 5),
-
                 Text(
-                  'R\$ ${catalogo.valorTotal.toStringAsFixed(2)}',
-                  style: const TextStyle(
+                  'Encontre seu som.',
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Instrumentos para todos os estilos.',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 15,
                   ),
                 ),
               ],
             ),
           ),
 
+          // Informações do catálogo
+          Padding(
+            padding: const EdgeInsets.fromLTRB(18, 22, 18, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Nosso catálogo',
+                  style: TextStyle(
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    '${catalogo.quantidade} produtos',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Lista
           Expanded(
             child: ListView.builder(
+              padding: const EdgeInsets.fromLTRB(18, 5, 18, 110),
               itemCount: catalogo.instrumentos.length,
-
               itemBuilder: (context, index) {
                 final instrumento = catalogo.instrumentos[index];
 
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-
-                  child: InstrumentoCard(
-                    instrumento: instrumento,
-
-                    // Quando clicar na lixeira
-                    onExcluir: () {
-                      excluirInstrumento(instrumento);
-                    },
-                  ),
+                return InstrumentoCard(
+                  instrumento: instrumento,
+                  onExcluir: () {
+                    excluirInstrumento(instrumento);
+                  },
                 );
               },
             ),
@@ -193,11 +229,59 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
 
-      floatingActionButton: FloatingActionButton(
+      // Total na parte inferior
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.fromLTRB(20, 15, 90, 15),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
+              offset: Offset(0, -2),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'VALOR DO CATÁLOGO',
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+
+            Text(
+              'R\$ ${catalogo.valorTotal.toStringAsFixed(2)}',
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: abrirCadastro,
-        backgroundColor: Colors.indigo,
+        backgroundColor: const Color(0xFF171717),
         foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add),
+        label: const Text(
+          'Adicionar',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
