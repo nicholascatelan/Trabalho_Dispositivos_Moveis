@@ -21,7 +21,7 @@ void main() {
   //         EXERCÍCIO 2 - HERANÇA
   // ==================================================
 
-  // Cria um objeto da classe filha.
+
   final instrumentoEletrico = InstrumentoEletrico(
     nome: 'Guitarra Elétrica',
     marca: 'Gibson',
