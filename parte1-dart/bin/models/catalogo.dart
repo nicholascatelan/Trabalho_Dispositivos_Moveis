@@ -12,7 +12,7 @@ class Catalogo {
   }
 
   List<Instrumento> get instrumentos {
-    return List.unmodifiable(_instrumentos); // -> imprede que a lista seja alterada diretamente de fora da classe
+    return List.unmodifiable(_instrumentos); // - impede que a lista seja alterada diretamente de fora da classe
   }
   
   double get valorTotal {
